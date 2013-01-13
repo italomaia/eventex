@@ -1,0 +1,11 @@
+bin
+build
+lib
+local
+man
+share
+Scripts
+.Python
+*~
+*.pyc
+*.db
