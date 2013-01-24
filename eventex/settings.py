@@ -1,10 +1,12 @@
 # coding:utf-8
 
 import os
-import dj_database_url
 
-PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-DEBUG = True
+import dj_database_url
+from unipath import Path
+
+PROJECT_DIR = Path(__file__).parent.parent
+DEBUG = os.getenv('DEBUG', 'true').lower() == 'true'
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -15,7 +17,8 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': dj_database_url.config(
+        default='sqlite:///' + PROJECT_DIR.child('database.db'))
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -43,7 +46,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = PROJECT_DIR.child('media_root')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -54,7 +57,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = PROJECT_DIR.child('static_root')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -99,7 +102,7 @@ ROOT_URLCONF = 'eventex.urls'
 WSGI_APPLICATION = 'eventex.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates'),
+    PROJECT_DIR.child('templates'),
 )
 
 INSTALLED_APPS = (
@@ -109,11 +112,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gunicorn',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -144,8 +143,3 @@ LOGGING = {
         },
     }
 }
-
-try:
-    from local_settings import *
-except ImportError:
-    pass
