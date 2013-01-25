@@ -1,0 +1,5 @@
+#subscription_form label{ width:160px; }
+#subscription_form input[type=text]{ width:200px; }
+a{ text-decoration: none; }
+a:hover{ text-decoration: underline; }
+strong{ font-size: 1.6em; }

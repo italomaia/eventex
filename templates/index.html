@@ -6,18 +6,22 @@
 
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/lessv4.css" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/more.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css" />
 
-    <title>EventeX</title>
+    <title>{% block title %}EventeX{% endblock %}</title>
 </head>
 <body>
-    <span class="huge">EventeX</span>
+    <span class="huge"><a href="/">EventeX</a></span>
+    {% block content %}
     <h1>Bem-vindo ao EventeX!</h1>
 
     <p>O evento mais sensacional do ano depois do Dev in Rio!</p>
     <p>Você não pode perder essa oportunidade!</p>
+    <p><strong><a href="/inscricao/">Inscreva-se já!</a></strong></p>
     <p>
         <strong>Abertura das inscrições dia 20/01/2013</strong>
     </p>
+    {% endblock %}
     <p>
         Para dúvidas e mais informações, entre em contato com <a href="mailto:eventex@eventex.com.br">eventex@eventex.com.br</a>
     </p>
