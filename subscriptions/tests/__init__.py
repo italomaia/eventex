@@ -1,3 +1,6 @@
+# coding:utf-8
+
 from .test_forms import *
-from .test_views import *
+from .test_views_subscribe import *
+from .test_views_subscription_detail import *
 from .test_models import *

@@ -1,4 +1,5 @@
 # coding:utf-8
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,8 +13,12 @@ class Subscription(models.Model):
 
     class Meta:
         ordering = ['created_at']
-        verbose_name = _('inscrição')
-        verbose_name_plural = _('inscrições')
+        verbose_name = _(u'inscrição')
+        verbose_name_plural = _(u'inscrições')
 
     def __unicode__(self):
         return self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('subscriptions.views.subscription', [str(self.id)])
