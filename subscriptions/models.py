@@ -21,4 +21,4 @@ class Subscription(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('subscriptions.views.subscription', [str(self.id)])
+        return ('subscriptions:subscription', [str(self.id)])

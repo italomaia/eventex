@@ -4,6 +4,7 @@ from datetime import datetime
 
 from django.test import TestCase
 from django.db import IntegrityError
+from django.core.urlresolvers import reverse
 
 
 class SubscriptionTest(TestCase):
@@ -53,4 +54,12 @@ class SubscriptionTest(TestCase):
         from subscriptions.models import Subscription
 
         self.assertEqual(u'Italo Maia', unicode(self.obj))
+
+    def test_permalink(self):
+        self.obj.save()
+        self.assertIsInstance(self.obj.get_absolute_url(), basestring)
+
+    def test_permalink_has_id(self):
+        self.obj.save()
+        self.assertIn(str(self.obj.pk), self.obj.get_absolute_url())
 

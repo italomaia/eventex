@@ -1,10 +1,11 @@
 # coding:utf-8
 
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
 class SubscribeTest(TestCase):
     def setUp(self):
-        self.resp = self.client.get('/inscricao/')
+        self.resp = self.client.get(reverse('subscriptions:subscribe'))
 
     def test_get(self):
         """
@@ -30,7 +31,8 @@ class SubscribePostTest(TestCase):
     def setUp(self):
         data = dict(name='Henrique Bastos', cpf='12345678901',
             email='henrique@bastos.net', phone='21-96186180')
-        self.resp = self.client.post('/inscricao/', data)
+        url = reverse('subscriptions:subscribe')
+        self.resp = self.client.post(url, data)
 
     def test_post(self):
         """
@@ -50,7 +52,7 @@ class SubscribeInvalidPostTest(TestCase):
     def setUp(self):
         data = dict(name='Henrique Bastos', cpf='12345678210983192083012901',
             email='henrique@bastos.net', phone='21-96186180')
-        self.resp = self.client.post('/inscricao/', data)
+        self.resp = self.client.post(reverse('subscriptions:subscribe'), data)
 
     def test_post(self):
         """
