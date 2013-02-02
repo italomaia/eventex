@@ -8,7 +8,7 @@ class Subscription(models.Model):
     created_at = models.DateTimeField(_('Criado em'), auto_now_add=True)
     name = models.CharField(_('Nome'), max_length=100)
     cpf = models.CharField(_('CPF'), max_length=16, unique=True)
-    email = models.EmailField(_('Email'), unique=True)
+    email = models.EmailField(_('Email'), blank=True)
     phone = models.CharField(_('Telefone'), max_length=20, blank=True)
     paid = models.BooleanField(_('Pago'), default=False)
 

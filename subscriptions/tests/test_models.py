@@ -13,7 +13,7 @@ class SubscriptionTest(TestCase):
 
         self.obj = Subscription(
             name='Italo Maia',
-            cpf='1234567890',
+            cpf='12345678901',
             email='algo@algo.com',
             phone='2345678')
 
@@ -29,26 +29,27 @@ class SubscriptionTest(TestCase):
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_cpf_unique(self):
+        """CPF must be unique"""
         from subscriptions.models import Subscription
 
         self.obj.save()
         s = Subscription(
             name='Italo Maia',
-            cpf='1234567890',
+            cpf='12345678901',
             email='outro@algo.com',
             phone='2345678')
         self.assertRaises(IntegrityError, s.save)
 
-    def test_email_unique(self):
+    def test_email_can_repeat(self):
+        """Email is not unique anymore"""
         from subscriptions.models import Subscription
 
         self.obj.save()
-        s = Subscription(
+        s = Subscription.objects.create(
             name='Italo Maia',
-            cpf='0123456789',
-            email='algo@algo.com',
-            phone='2345678')
-        self.assertRaises(IntegrityError, s.save)
+            cpf='12345678902',
+            email='outro@algo.com')
+        self.assertEqual(2, s.pk)
 
     def test_unicode(self):
         from subscriptions.models import Subscription
