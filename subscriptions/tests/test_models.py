@@ -63,3 +63,6 @@ class SubscriptionTest(TestCase):
         self.obj.save()
         self.assertIn(str(self.obj.pk), self.obj.get_absolute_url())
 
+    def test_paid_default_value_is_false(self):
+        self.assertEqual(False, self.obj.paid)
+

@@ -10,6 +10,7 @@ class Subscription(models.Model):
     cpf = models.CharField(_('CPF'), max_length=16, unique=True)
     email = models.EmailField(_('Email'), unique=True)
     phone = models.CharField(_('Telefone'), max_length=20, blank=True)
+    paid = models.BooleanField(_('Pago'), default=False)
 
     class Meta:
         ordering = ['created_at']
